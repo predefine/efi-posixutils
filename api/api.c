@@ -4,7 +4,10 @@
 
 struct applet applets[] = {
 #ifdef CONFIG_LS
-    {"ls", ls_main}
+    {"ls", ls_main},
+#endif
+#ifdef CONFIG_CAT
+    {"cat", cat_main},
 #endif
 };
 

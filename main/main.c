@@ -4,7 +4,11 @@
 #define usage_error() {usage(argv[0]); goto err;}
 
 void usage(char* argv0){
-    printf("Usage: %s help\n", argv0);
+    printf("Usage: %s <applet>\n", argv0);
+    printf("Applets:");
+    for(int i = 0; i < applets_getcount(); i++)
+        printf(" %s", applets[i].name);
+    printf("\n");
 }
 
 int main (int argc, char **argv)
