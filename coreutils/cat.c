@@ -13,13 +13,7 @@ int cat_main(int argc, char** argv){
     if(f==NULL)
         APPLET_ERROR_NUMBER(errno)
     
-    if (strcmp(read_from, "/dev/stdin")){
-        size_t filesize = fsize(f);
-        char *buf = malloc(filesize+1);
-
-        fread(buf, filesize, 1, f);
-        fwrite(buf, filesize, 1, stdout);
-    } else {
+    if (!strcmp(read_from, "/dev/stdin")){
         int key = 0;
         for(;;key=getchar_ifany()){
             if(key==KEY_CTRLC) goto end;
@@ -28,6 +22,20 @@ int cat_main(int argc, char** argv){
                 printf("%c", key);
             }
         }
+        
+    } else {
+        size_t filesize = fsize(f);
+        char *buf = malloc(filesize+1);
+        if(!buf)
+            APPLET_ERROR("unable to allocate memory\n");
+
+        if(!fread(buf, filesize, 1, f))
+            APPLET_ERROR_NUMBER(errno);
+
+        buf[filesize]=0;
+        fclose(f);
+        printf("\n%s\n", buf);
+        free(buf);
     }
 end:
     printf("\n");
