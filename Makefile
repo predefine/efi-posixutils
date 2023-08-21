@@ -1,5 +1,7 @@
 include efi.mk
 
+OVMF:=../code.fd
+
 all: createDisc
 
 createDisc: posixutils.efi
@@ -8,4 +10,4 @@ createDisc: posixutils.efi
 	mcopy -i efi.img posixutils.efi "::posixutils.efi"
 
 test: createDisc
-	qemu-system-x86_64 -pflash ../code.fd -m 256M --enable-kvm -hda efi.img -vga cirrus -net none
+	qemu-system-x86_64 -pflash $(OVMF) -m 256M --enable-kvm -hda efi.img -vga cirrus -net none
