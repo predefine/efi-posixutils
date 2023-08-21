@@ -8,4 +8,4 @@ createDisc: posixutils.efi
 	mcopy -i efi.img posixutils.efi "::posixutils.efi"
 
 test: createDisc
-	qemu-system-x86_64 -pflash ../code.fd -m 256M --enable-kvm -hda efi.img -vga std
+	qemu-system-x86_64 -pflash ../code.fd -m 256M --enable-kvm -hda efi.img -vga cirrus

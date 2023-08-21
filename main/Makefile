@@ -1,0 +1,1 @@
+SRCS-y += main/main.c

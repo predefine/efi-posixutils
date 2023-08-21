@@ -1,0 +1,1 @@
+SRCS-$(CONFIG_LS) += coreutils/ls.c

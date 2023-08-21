@@ -1,4 +1,5 @@
 #include <uefi.h>
+#include <api.h>
 
 #define usage_error() {usage(argv[0]); goto err;}
 
@@ -14,7 +15,6 @@ int main (int argc, char **argv)
     if(!strcmp(argv[1], "help")){
         printf("TODO!\n");
     } else usage_error();
-
 
     return 0;
 err:
