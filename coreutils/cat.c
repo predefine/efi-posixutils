@@ -2,8 +2,7 @@
 #include <error.h>
 #include <applets.h>
 #include <utils.h>
-
-#define KEY_ESC 0x29
+#include <keys.h>
 
 int cat_main(int argc, char** argv){
     char* read_from = NULL;
@@ -23,11 +22,14 @@ int cat_main(int argc, char** argv){
     } else {
         int key = 0;
         for(;;key=getchar_ifany()){
-            if(key==KEY_ESC) return 0;
-            if(key!=0) {
+            if(key==KEY_CTRLC) goto end;
+            if(key==KEY_ENTER) printf("\n");
+            else if(key!=0) {
                 printf("%c", key);
             }
         }
     }
+end:
+    printf("\n");
     return 0;
 }
