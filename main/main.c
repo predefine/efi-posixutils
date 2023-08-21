@@ -12,11 +12,15 @@ int main (int argc, char **argv)
     if(argc<2)
         usage_error();
 
-    if(!strcmp(argv[1], "help")){
-        printf("TODO!\n");
-    } else usage_error();
+    struct applet* app = find_applet(argv[1]);
+    if(app==NULL)
+        usage_error();
+    
+    argc--;
+    argv++;
 
-    return 0;
+    return app->applet_main(argc, argv);
+
 err:
     return 1;
 }
